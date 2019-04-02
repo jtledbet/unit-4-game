@@ -2,13 +2,13 @@
 
 .crystal-image {
     width: 250px;
-    /* height: 250px; */
+    max-height: 300px;
 }
 
 .container {
-    font-size: rem1;
+    float:left;
 }
 
 body {
-    font-size: rem1;
+    
 }

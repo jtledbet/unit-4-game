@@ -35,8 +35,8 @@ function startGame() {
         // apply respective images:
         if (i === 0) thisCrystal.attr("src", "assets/images/blue.jpg");
         else if (i === 1) thisCrystal.attr("src", "assets/images/red.jpg");
-        else if (i === 2) thisCrystal.attr("src", "assets/images/white.jpg");
-        else if (i === 3) thisCrystal.attr("src", "assets/images/purple.jpg");
+        else if (i === 2) thisCrystal.attr("src", "assets/images/purple.jpg");
+        else if (i === 3) thisCrystal.attr("src", "assets/images/white.jpg");
 
         // apply respective numerical values:
         thisCrystal.attr("data-crystalvalue", numArray[i]);
@@ -83,7 +83,7 @@ function randomValues() {
     
     for (let i = 0; i < 4; i++) {
 
-        curNum = Math.round(Math.random() * 11) + 1;
+        curNum = Math.floor(Math.random() * 11) + 1;
         if (curNum == 0) curNum++;
 
         numIndex = tmpArray.indexOf(curNum);
