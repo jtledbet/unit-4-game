@@ -2,6 +2,7 @@
 var wins = 0;
 var losses = 0;
 var numArray = [];
+var gameOver = false;
 
 startGame();
 
@@ -10,6 +11,7 @@ function startGame() {
     $("#crystals").text('');
     $("#win-or-loss").text('');
     $("#current-score").text(currentScore);
+    gameOver = false;
 
     // Random target number (between 19 and 120)
     var targetNumber = (Math.round(Math.random() * 101));
@@ -47,29 +49,32 @@ function startGame() {
 
     // onClick for Crystal class
     $(".crystal-image").on("click", function () {
+        if (!gameOver) {
+            var crystalValue = ($(this).attr("data-crystalvalue"));
+            crystalValue = parseInt(crystalValue);
 
-        var crystalValue = ($(this).attr("data-crystalvalue"));
-        crystalValue = parseInt(crystalValue);
+            // tally score:
+            currentScore += crystalValue;
+            $("#current-score").text(currentScore);
 
-        // tally score:
-        currentScore += crystalValue;
-        $("#current-score").text(currentScore);
-
-        // win/lose conditions:
-        if (currentScore == targetNumber) {
-            $("#win-or-loss").text("You win! Restarting!");
-            wins++; $("#winsNow").text("Wins: " + wins);
-            setTimeout(function () {
-                startGame();
-            }, 3000);
-        }
-        else if (currentScore > targetNumber) {
-            $("#win-or-loss").text(currentScore + " exceeds " + targetNumber + "! You have lost! Restarting!");
-            losses++; $("#lossesNow").text("Losses: " + losses);
-            setTimeout(function () {
-                startGame();
-            }, 3000);
-        }
+            // win/lose conditions:
+            if (currentScore == targetNumber) {
+                $("#win-or-loss").text("You win! Restarting!");
+                wins++; $("#winsNow").text("Wins: " + wins);
+                gameOver = true;
+                setTimeout(function () {
+                    startGame();
+                }, 3000);
+            }
+            else if (currentScore > targetNumber) {
+                $("#win-or-loss").text(currentScore + " exceeds " + targetNumber + "! You have lost! Restarting!");
+                losses++; $("#lossesNow").text("Losses: " + losses);
+                gameOver = true;
+                setTimeout(function () {
+                    startGame();
+                }, 3000);
+            }
+        } 
     });
 }
 
